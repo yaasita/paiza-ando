@@ -39,4 +39,4 @@ for(my $i=0;$i+1 <= @block+0;$i++){
         }
     }
 }
-say "$y $x";
+print "$y $x";

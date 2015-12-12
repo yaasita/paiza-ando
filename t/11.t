@@ -17,4 +17,9 @@ subtest 'example2' => sub { #{{{
     chomp $result;
     is $result,"1 2";
 }; #}}}
+subtest 'my1' => sub { #{{{
+    my $result = `cat 11_my1.dat | ../ando11.pl`;
+    chomp $result;
+    is $result,"1 1";
+}; #}}}
 done_testing;
