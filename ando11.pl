@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use feature qw(say);
 
 # 入力
 my (@block,@pattern);
@@ -27,6 +26,7 @@ my (@block,@pattern);
 my ($y,$x) = (0,0);
 for(my $i=0;$i+1 <= @block+0;$i++){
     if (index($block[$i],$pattern[0]) > -1){
+        my $i_temp = $i;
         $y = $i;
         $x = index($block[$i],$pattern[0]);
         $i++;
@@ -37,6 +37,7 @@ for(my $i=0;$i+1 <= @block+0;$i++){
             }
             $i++;
         }
+        $i = $i_temp;
     }
 }
 print "$y $x";
