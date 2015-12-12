@@ -29,9 +29,6 @@ for(my $i=0;$i+1 <= @block+0;$i++){
         my $offset = $_;
         if (index($block[$i],$pattern[0],$offset) > -1){
             my $pos = index($block[$i],$pattern[0],$offset);
-            debug ("block line = $block[$i]");
-            debug ("index = $pattern[0]");
-            debug ("offset = $pos");
             if (match({ 'line' => $i, 'offset' => $pos })){
                 say "$i $pos";
                 exit;
@@ -40,7 +37,6 @@ for(my $i=0;$i+1 <= @block+0;$i++){
     }
 }
 sub match{
-    debug("match call");
     my $c = shift;
     my $start = $c->{'line'} + 1;
     my $offset = $c->{'offset'};
@@ -50,19 +46,12 @@ sub match{
     }
     my $length = length($pattern[0]);
     for ($start..$end){
-        debug( "substr($block[$_],$offset,$length)");
         my $cmp_block   = substr($block[$_],$offset,$length);
         my $cmp_pattern = $pattern[$_ - $start + 1];
-        debug( "cmp_block   = ", $cmp_block);
-        debug( "cmp_pattern = ", $cmp_pattern);
         if ($cmp_block ne $cmp_pattern){
             return 0;
         }
     }
-    debug("match ok");
     return 1;
-}
-sub debug{
-    #say @_;
 }
 
