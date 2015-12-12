@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
+use feature qw(say);
 
 # 入力
 my (@block,@pattern);
@@ -23,21 +24,29 @@ my (@block,@pattern);
     }
 }
 # パターン探索
-my ($y,$x) = (0,0);
 for(my $i=0;$i+1 <= @block+0;$i++){
     if (index($block[$i],$pattern[0]) > -1){
-        my $i_temp = $i;
-        $y = $i;
-        $x = index($block[$i],$pattern[0]);
-        $i++;
-        for (my $j=1;$i+1 <= @block+0 and $j+1 <= @pattern+0;$j++){
-            my $diff = substr($block[$i],$x,length($pattern[$j]));
-            if ($diff ne $pattern[$j]){
-                last;
-            }
-            $i++;
+        my $offset = index($block[$i],$pattern[0]);
+        if (match({ 'line' => $i, 'offset' => $offset })){
+            say "$i $offset";
         }
-        $i = $i_temp;
     }
 }
-print "$y $x";
+sub match{
+    my $c = shift;
+    my $start = $c->{'line'} + 1;
+    my $offset = $c->{'offset'};
+    my $end = $start + @pattern - 2;
+    if ($end > $#block){
+        return 0;
+    }
+    my $length = length($pattern[0]);
+    for ($start..$end){
+        my $cmp_block   = substr($block[$_],$offset,$length);
+        my $cmp_pattern = $pattern[$_ - $start + 1];
+        if ($cmp_block ne $cmp_pattern){
+            return 0;
+        }
+    }
+    return 1;
+}
