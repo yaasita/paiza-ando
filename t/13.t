@@ -8,17 +8,17 @@ use FindBin;
 chdir $FindBin::Bin;
 
 subtest 'example0' => sub { #{{{
-    my $result = `cat 13_ex0.dat | ../ando13.pl`;
+    my $result = `echo 38 | ../ando13.pl`;
     chomp $result;
     is $result,"742912";
 }; #}}}
 subtest 'example1' => sub { #{{{
-    my $result = `cat 13_ex1.dat | ../ando13.pl`;
+    my $result = `echo 15 | ../ando13.pl`;
     chomp $result;
     is $result,"307674368";
 }; #}}}
 subtest 'example2' => sub { #{{{
-    my $result = `cat 13_ex2.dat | ../ando13.pl`;
+    my $result = `echo 10 | ../ando13.pl`;
     chomp $result;
     is $result,"36288";
 }; #}}}
