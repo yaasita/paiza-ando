@@ -3,14 +3,7 @@ use strict;
 use warnings;
 use feature qw(say);
 
-my %buy;
-{
-    my $total = <STDIN>;
-    chomp $total;
-    for(1..$total){
-        $buy{$_} = 1;
-    }
-}
+<STDIN>;
 my @mybooks;
 {
     <STDIN>;
@@ -25,15 +18,16 @@ my @salebooks;
     chomp $salebooks;
     @salebooks = split(/\s/,$salebooks);
 }
-# 自分が持っている本を削除
-for (@mybooks){
-    delete($buy{$_});
-}
+my %buy;
 # 中古にあるやつを+1
 for (@salebooks){
     $buy{$_}++;
 }
-my @buy = grep {$buy{$_} >= 2} keys %buy;
+# 自分の本を削除
+for (@mybooks){
+    delete($buy{$_});
+}
+my @buy = grep {$buy{$_} >= 1} keys %buy;
 @buy = sort {$a <=> $b} @buy;
 if (@buy+0 == 0){
     say "None";
