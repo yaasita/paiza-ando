@@ -35,4 +35,9 @@ for (@salebooks){
 }
 my @buy = grep {$buy{$_} >= 2} keys %buy;
 @buy = sort {$a <=> $b} @buy;
-say "@buy";
+if (@buy+0 == 0){
+    say "None";
+}
+else {
+    say "@buy";
+}
