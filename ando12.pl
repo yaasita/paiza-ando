@@ -50,12 +50,12 @@ package main;
 
 my ($x,$y,$z);
 {
-    my $line = <DATA>;
+    my $line = <STDIN>;
     chomp $line;
     ($x, $y, $z) = split(/\s/,$line);
 }
 my $pkg = Cake->new($x, $y, $z);
-while (<DATA>){
+while (<STDIN>){
     chomp;
     my ($hoko, $cm) = split(/\s/);
     $pkg->cut($hoko,$cm);
@@ -74,11 +74,3 @@ my @blocks;
     @blocks = sort {$a <=> $b} @blocks;
 }
 say $blocks[0];
-
-__DATA__
-20 40 10 5
-1 34
-1 17
-0 7
-1 6
-0 11
