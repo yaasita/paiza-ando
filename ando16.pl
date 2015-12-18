@@ -5,7 +5,7 @@ use feature qw(say);
 
 my %buy;
 {
-    my $total = <DATA>;
+    my $total = <STDIN>;
     chomp $total;
     for(1..$total){
         $buy{$_} = 1;
@@ -13,15 +13,15 @@ my %buy;
 }
 my @mybooks;
 {
-    <DATA>;
-    my $mybooks = <DATA>;
+    <STDIN>;
+    my $mybooks = <STDIN>;
     chomp $mybooks;
     @mybooks = split(/\s/,$mybooks);
 }
 my @salebooks;
 {
-    <DATA>;
-    my $salebooks = <DATA>;
+    <STDIN>;
+    my $salebooks = <STDIN>;
     chomp $salebooks;
     @salebooks = split(/\s/,$salebooks);
 }
